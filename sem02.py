@@ -1,14 +1,14 @@
 import streamlit as st
 
-#Inicialización de variables 
+# Inicialización de variables
 usuarios = []
 
-#Función para agregar un usuario
+# Función para agregar un usuario
 def agregar_usuario(nombre):
     usuarios.append(nombre)
     st.success(f"Usuario {nombre} agregado.")
 
-#Función para mostrar usuarios
+# Función para mostrar usuarios
 def mostrar_usuarios():
     if usuarios:
         st.write("Lista de usuarios:")
@@ -17,7 +17,7 @@ def mostrar_usuarios():
     else:
         st.warning("No hay usuarios registrados.")
 
-#Menú Principal
+# Menú Principal
 st.title("Gestión de Usuarios")
 
 opcion = st.selectbox("Selecciona una opción", ["Agregar Usuario", "Mostrar Usuarios"])
