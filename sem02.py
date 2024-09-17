@@ -2,7 +2,9 @@ import streamlit as st
 
 # Inicialización de variables
 usuarios = []
-
+if 'usuarios' not in st.session_state:
+    st.session_state['usuarios'] = []
+    
 # Función para agregar un usuario
 def agregar_usuario(nombre):
     usuarios.append(nombre)
