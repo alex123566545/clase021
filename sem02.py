@@ -1,20 +1,19 @@
 import streamlit as st
 
-# Inicialización de variables
-usuarios = []
+# Inicialización de variables en el estado de la sesión
 if 'usuarios' not in st.session_state:
     st.session_state['usuarios'] = []
-    
+
 # Función para agregar un usuario
 def agregar_usuario(nombre):
-    usuarios.append(nombre)
+    st.session_state['usuarios'].append(nombre)
     st.success(f"Usuario {nombre} agregado.")
 
 # Función para mostrar usuarios
 def mostrar_usuarios():
-    if usuarios:
+    if st.session_state['usuarios']:
         st.write("Lista de usuarios:")
-        for usuario in usuarios:
+        for usuario in st.session_state['usuarios']:
             st.write(f"- {usuario}")
     else:
         st.warning("No hay usuarios registrados.")
