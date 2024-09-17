@@ -13,7 +13,7 @@ def mostrar_usuarios():
     if usuarios:
         st.write("Lista de usuarios:")
         for usuario in usuarios:
-            st.white(f"- {usuario}")
+            st.write(f"- {usuario}")
     else:
         st.warning("No hay usuarios registrados.")
 
