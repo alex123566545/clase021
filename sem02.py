@@ -9,7 +9,6 @@ if st.button("Ejecutar E1"):
         st.write("hola mundo")
 
 st.subheader("Ejercicio 2: imprimir los 10 primeros numeros")
-
 if st.button("Ejecutar E2"):
-    for i in range(1,11);
+    for i in range(1,11)
       st.write(i);
