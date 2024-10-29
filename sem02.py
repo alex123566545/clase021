@@ -23,5 +23,3 @@ if st.button("Calcular"):
     st.write(f"Sumatoria de los datos del array: {sumatoria}")
 
 
-if __name__ == "__main__":
-    main()
