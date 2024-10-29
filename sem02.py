@@ -1,41 +1,27 @@
 import streamlit as st
 
-def calcular(operacion, num1, num2):
-    """Realiza la operación especificada entre num1 y num2."""
-    try:
-        num1 = float(num1)
-        num2 = float(num2)
-    except ValueError:
-        return "Por favor, ingrese números válidos"
-    
-    if operacion == "Suma":
-        return num1+num2
-    elif operacion == "Resta":
-        return num1-num2
-    elif operacion == "Multiplicación":
-        return num1*num2
-    elif operacion == "División":
-        if num2 == 0:
-            return "Error: no se puede dividir entre 0"
-        return num1/num2
-    else:
-        return "Operación no válida"
+# Función para calcular múltiplos de X entre 0 y 100
+def calcular_multiplos(x):
+    # Generar lista de múltiplos de x entre 0 y 100
+    multiplos = [i for i in range(0, 101) if i % x == 0]
+    # Calcular cantidad y sumatoria
+    cantidad = len(multiplos)
+    sumatoria = sum(multiplos)
+    return multiplos, cantidad, sumatoria
 
-def main():
-    st.title("Calculadora Básica")
-    st.write("Seleccione la operación e ingrese los números: ")
+# Interfaz de Streamlit
+st.title("Múltiplos de un número entre 0 y 100")
 
-    #Seleccione la operación
-    operacion = st.selectbox("Operación", ("Suma", "Resta", "Multiplicación", "División"))
+# Input para que el usuario ingrese el valor de X
+x = st.number_input("Ingresa el valor de X:", min_value=1, step=1)
 
-    #Entradas para los números
-    num1 = st.text_input("Número 1")
-    num2 = st.text_input("Número 2")
+# Botón para calcular
+if st.button("Calcular"):
+    multiplos, cantidad, sumatoria = calcular_multiplos(x)
+    st.write(f"Array de múltiplos de {x} entre 0 y 100: {multiplos}")
+    st.write(f"Cantidad de datos almacenados: {cantidad}")
+    st.write(f"Sumatoria de los datos del array: {sumatoria}")
 
-    #Botón para calcular
-    if st.button("Calcular"):
-        resultado = calcular(operacion, num1, num2)
-        st.write("**Resultado:**", resultado)
 
 if __name__ == "__main__":
     main()
