@@ -1,19 +1,36 @@
 import streamlit as st
 
-# Inicialización de variables en el estado de la sesión
-st.title("Ejercicios basicos con bucles") 
+def validate_data(marca, modelo, kilometraje):
+    """Valida los datos ingresados para el automóvil."""
+    if not marca or not modelo:
+        return "La marca y el modelo no deben estar vacíos."
+    try:
+        kilometraje = float(kilometraje)
+        if kilometraje < 0:
+            return "El kilometraje no puede ser menor que 0."
+    except ValueError:
+        return "El kilometraje debe ser un número válido."
+    return None
 
-st.subheader("Ejercicio 1: imprimir hola mundo 9 veces")
-if st.button("Ejecutar E1"):
-    for i in range(10):
-        st.write("hola mundo")
+def main():
+    st.title("Registro de Automóvil")
+    st.write("Ingrese los datos del automóvil a continuación:")
 
-st.subheader("Ejercicio 2: imprimir los 10 primeros numeros")
-if st.button("Ejecutar E2"):
-    for i in range(1, 11):
-        st.write(i)
-st.subheader("Ejercicio 3: imprimir la tabla de multiplicar del numero ingresado")
-num = st.number_input("Ingrese un numero para ver su tabla de multiplicar del 1 al 12", min_value = 1, max_value=12)
-if st.button("Ejecutar Ejercicio 3"):
-    for i in range(1,13):
-        st.write(f"{num} x {i} ={num*i}")
+    #Registro por el usuario
+    marca = st.text_input("Marca del automóvil")
+    modelo = st.text_input("Modelo del automóvil")
+    kilometraje = st.text_input("Kilometraje del automóvil")
+
+    if st.button("Registrar"):
+        #validación de los datos
+        error = validate_data(marca, modelo, kilometraje)
+        if error:
+            st.error(error)
+        else:
+            st.success("Automóvil registrado exitosamente.")
+            st.write("**Marca:**",marca)
+            st.write("**Modelo:**",modelo)
+            st.write("**Kilometraje:**", kilometraje)
+
+if __name__ == "__main__":
+    main()
