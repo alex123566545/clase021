@@ -1,25 +1,29 @@
 import streamlit as st
+import math
 
-# Función para calcular múltiplos de X entre 0 y 100
-def calcular_multiplos(x):
-    # Generar lista de múltiplos de x entre 0 y 100
-    multiplos = [i for i in range(0, 101) if i % x == 0]
-    # Calcular cantidad y sumatoria
-    cantidad = len(multiplos)
-    sumatoria = sum(multiplos)
-    return multiplos, cantidad, sumatoria
+# Función para calcular el área de una circunferencia
+def calcular_area(radio):
+    return math.pi * radio ** 2
 
-# Interfaz de Streamlit
-st.title("Múltiplos de un número entre 0 y 100")
+# Función para calcular el perímetro de una circunferencia
+def calcular_perimetro(radio):
+    return 2 * math.pi * radio
 
-# Input para que el usuario ingrese el valor de X
-x = st.number_input("Ingresa el valor de X:", min_value=1, step=1)
+# Título de la aplicación
+st.title("Cálculo de Área y Perímetro de una Circunferencia")
 
-# Botón para calcular
+# Solicitar al usuario que ingrese el radio
+radio = st.number_input("Ingrese el radio de la circunferencia:", min_value=0.0, step=0.1)
+
+# Botón para realizar el cálculo
 if st.button("Calcular"):
-    multiplos, cantidad, sumatoria = calcular_multiplos(x)
-    st.write(f"Array de múltiplos de {x} entre 0 y 100: {multiplos}")
-    st.write(f"Cantidad de datos almacenados: {cantidad}")
-    st.write(f"Sumatoria de los datos del array: {sumatoria}")
-
-
+    if radio > 0:
+        # Calcular área y perímetro
+        area = calcular_area(radio)
+        perimetro = calcular_perimetro(radio)
+        
+        # Mostrar resultados
+        st.write(f"**Área de la circunferencia:** {area:.2f}")
+        st.write(f"**Perímetro de la circunferencia:** {perimetro:.2f}")
+    else:
+        st.error("Por favor, ingrese un radio mayor a 0.")
