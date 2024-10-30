@@ -1,28 +1,29 @@
 import streamlit as st
 
+# Inicialización de la lista para almacenar los números
+if 'numeros' not in st.session_state:
+    st.session_state.numeros = []
+
 # Título de la aplicación
-st.title("Suma de Elementos de la Serie Numérica")
+st.title("Contador de Números en un Array")
 
-# Explicación para el usuario
-st.write("Esta aplicación calcula la suma de los primeros n elementos de la serie numérica: 1, 5, 3, 7, 5, 9, 7, ...")
+# Ingreso del tamaño del array
+tamaño = st.number_input("Ingrese el tamaño del array (número entero positivo):", min_value=1, step=1)
 
-# Campo de entrada para el número de elementos
-n = st.number_input("Ingrese el valor de n (debe ser un número entero positivo):", min_value=1, step=1)
+# Ingreso de los números
+if tamaño > 0:
+    st.write(f"Ingrese {tamaño} números:")
+    for i in range(tamaño):
+        numero = st.number_input(f"Número {i + 1}:", key=i)  # Uso de 'key' para que cada input tenga un identificador único
+        st.session_state.numeros.append(numero)
 
-# Función para calcular la suma de la serie
-def calcular_suma(n):
-    serie = []
-    for i in range(n):
-        if i % 2 == 0:  # Índices pares (0, 2, 4, ...)
-            serie.append(1 + (i // 2) * 2)  # 1, 3, 5, 7, ...
-        else:  # Índices impares (1, 3, 5, ...)
-            serie.append(5 + (i // 2) * 2)  # 5, 7, 9, ...
-    return sum(serie)
+# Botón para buscar el número en el array
+buscar = st.number_input("Ingrese un número a buscar:", step=1.0)
 
-# Botón para calcular la suma
-if st.button("Calcular suma"):
-    if n > 0:  # Validación
-        suma = calcular_suma(n)
-        st.write(f"La suma de los primeros {n} elementos de la serie es: {suma}")
+if st.button("Buscar"):
+    if st.session_state.numeros:
+        # Contar cuántas veces aparece el número buscado en el array
+        conteo = st.session_state.numeros.count(buscar)
+        st.write(f"El número {buscar} se encontró {conteo} vez/veces en el array.")
     else:
-        st.warning("Por favor, ingrese un número entero positivo.")
+        st.write("No se han ingresado números en el array.")
