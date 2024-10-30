@@ -16,7 +16,7 @@ if st.button("calcular"):
         area = calcular_area(radio)
         perimetro = calcular_perimetro(radio)
 
-        st.write(f"**Area de la circunferencia: ** {area:.2f}")
+        st.write(f"**Area de la circunferencia:** {area:.2f}")
         st.write(f"**Perimetro de la circunferencia:** {perimetro:.2f}")
     else:
         st.error("Ingrese un readio mayor a ")
