@@ -1,43 +1,37 @@
 import streamlit as st
 
-# Inicialización de variables para la suma y el contador de números
-suma = 0
-contador = 0
+# Inicialización de variables
+puntos_contaminantes = []
 
 # Título de la aplicación
-st.title("Calculadora de Suma y Media de Números")
+st.title("Centro de Verificación de Automóviles")
 
 # Explicación para el usuario
-st.write("Introduce números uno a uno. Para terminar, introduce el número 0.")
+st.write("Ingrese los puntos contaminantes de los automóviles.")
 
-# Crear un espacio de almacenamiento en la sesión
-if 'suma' not in st.session_state:
-    st.session_state.suma = 0
-    st.session_state.contador = 0
+# Bucle para ingresar datos de los automóviles
+while True:
+    # Ingreso de puntos contaminantes
+    puntos = st.number_input("Ingrese los puntos contaminantes del automóvil:", step=1.0, min_value=0.0)
+    
+    # Agregar el dato a la lista
+    puntos_contaminantes.append(puntos)
+    
+    # Preguntar si se desea agregar otro automóvil
+    continuar = st.radio("¿Desea ingresar los datos de otro automóvil?", ("Sí", "No"))
+    
+    if continuar == "No":
+        break
 
-# Campo de entrada para el número
-numero = st.number_input("Introduce un número:", step=1.0)
+# Procesamiento de datos
+if puntos_contaminantes:  # Verificar si hay datos ingresados
+    promedio = sum(puntos_contaminantes) / len(puntos_contaminantes)
+    max_contaminacion = max(puntos_contaminantes)
+    min_contaminacion = min(puntos_contaminantes)
 
-# Botón para agregar el número
-if st.button("Añadir número"):
-    if numero != 0:
-        # Acumular suma y contar el número de entradas
-        st.session_state.suma += numero
-        st.session_state.contador += 1
-        st.success(f"Número añadido: {numero}")
-    else:
-        # Cálculo y muestra de la suma y la media
-        if st.session_state.contador > 0:
-            media = st.session_state.suma / st.session_state.contador
-            st.write(f"La suma de los números es: {st.session_state.suma}")
-            st.write(f"La media de los números es: {media:.2f}")
-        else:
-            st.write("No se han ingresado números válidos.")
-        
-        # Reiniciar la sesión
-        st.session_state.suma = 0
-        st.session_state.contador = 0
-
-# Mostrar la suma y el conteo en tiempo real
-st.write(f"Suma acumulada: {st.session_state.suma}")
-st.write(f"Números ingresados: {st.session_state.contador}")
+    # Mostrar resultados
+    st.write(f"**Promedio de puntos contaminantes:** {promedio:.2f}")
+    st.write(f"**Puntos contaminantes del automóvil que menos contaminó:** {min_contaminacion}")
+    st.write(f"**Puntos contaminantes del automóvil que más contaminó:** {max_contaminacion}")
+else:
+    st.write("No se han ingresado datos válidos.")
