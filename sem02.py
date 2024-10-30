@@ -1,26 +1,16 @@
 import streamlit as st
 
-# Inicialización de la lista para almacenar los números
-if 'numeros' not in st.session_state:
-    st.session_state.numeros = []
+def calcular_multiplos(x):
+    multiplos = [i for i in range(0,101) if i % x == 0]
+    cantidad = len(multiplos)
+    sumatoria = sum(multiplos)
+    return multiplos, cantidad, sumatoria
 
-# Título de la aplicación
-st.title("Encontrar el Mayor de un Array")
+st.title("Multiplos de un número entre 0  y  100")
+x = st.number_input("Ingresa el valor de X : ", min_value=1, step = 1)
 
-# Ingreso del tamaño del array
-tamaño = st.number_input("Ingrese el tamaño del array (número entero positivo):", min_value=1, step=1)
+multiplos, cantidad, sumatoria = calcular_multiplos(x)
+st.write(f"Array de multiplos de {x} entre 0 y 100: {multiplos}")
+st.write(f"Cantidad de datos almacenados: {cantidad}")
+st.write(f"Sumatoria de los datos del array :{sumatoria}")
 
-# Ingreso de los números
-if tamaño > 0:
-    st.write(f"Ingrese {tamaño} números:")
-    for i in range(tamaño):
-        numero = st.number_input(f"Número {i + 1}:", key=i)  # Uso de 'key' para que cada input tenga un identificador único
-        st.session_state.numeros.append(numero)
-
-# Botón para determinar el número mayor
-if st.button("Encontrar Mayor"):
-    if st.session_state.numeros:
-        mayor = max(st.session_state.numeros)  # Encuentra el número mayor
-        st.write(f"El número mayor ingresado es: {mayor}")
-    else:
-        st.write("No se han ingresado números en el array.")
