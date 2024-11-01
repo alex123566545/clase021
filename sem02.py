@@ -31,13 +31,13 @@ if st.button("Añadir número"):
             st.write(f"La suma de los numeros es: {st.session_state.suma}")
             st.write(f"La media de los numeros es: {media:.2f}")
              
-            # Reiniciar la sesion
-            st.session_state.suma = 0
-            st.session_state.contador = 0
+            
         else:
             st.write("No se ha ingresado numeros validos")
        
-
+# Reiniciar la sesion
+st.session_state.suma = 0
+    st.session_state.contador = 0
 # Mostrar la suma y el conteo en tiempo real
 st.write(f"Suma acumulada: {st.session_state.suma}")
 st.write(f"Numeros ingresados: {st.session_state.contador}")
