@@ -40,7 +40,7 @@ if st.session_state.numeros:
 
     #MOSTRAR RESULTADOS ESTADISTIICOS
     st.write(f"**Total de numeros ingresados:** {total_numeros}")
-    st.write(f"**Numeros pares: ** {pares} ({porcentaje_pares:.2f}%)")
+    st.write(f"**Numeros pares:** {pares} ({porcentaje_pares:.2f}%)")
     st.write(f"**Numeros impares:** {impares}({porcentaje_impares:.2f}%)")
 else:
     st.write("No se han ingresado numeros")
