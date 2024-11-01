@@ -22,7 +22,7 @@ if 'suma' not in st.session_state:
 
 numero = st.number_input("Introduce un número:" , step= 1.0)
 
-   #Botón para agregar el numero
+#Botón para agregar el numero
 
 if st.button("Añadir número"):
   if numero !=0:
