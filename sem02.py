@@ -1,7 +1,7 @@
 import streamlit as st
 
 #INICIALIZACIÓN DE LAS VARIABLES PARA LA SUMA Y EL CONTADOR DE NUMEROS
-sum = 0
+suma = 0
 contador = 0
 
 # Titulo de la aplicación
