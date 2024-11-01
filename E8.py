@@ -1,33 +1,32 @@
 import streamlit as st
 
-#Titulo de la aplicación 
-st.title("Suma de los elementos de la serie Numerica")
+#Inicialización de la lista para almacenar los numeros
 
-# Explicación para el usuario
+if 'numeros' not in st.session_state:
+    st.session_state.numeros = []
 
-st.write ("Esta aplicacion calcula la suma de los primeros n elementos de la series numerica : 1, 5, 3, 7, 5, 9, 7,...")
+# Titulo de la aplicacion
+    
+    st.title("Contador de Números en un array")
 
-# Campo de entrada para el numero de elementos
+#Ingreso del tamaño del array
 
-n = st.number_input("Ingrese el valor de n (debe ser un número entero positivo):", min_value=1,step=1)
+tamaño = st.number_input("Ingrese el tamaño del array(numero entero positivo):", min_value=1,step=1)
 
-# Funcion para calcular la suma de la serie
+#Ingreso de los numero
 
-def calcular_suma(n):
-    serie = []
-    for i in range(n):
-        if i % 2 == 0: # Indices pares {0,2,4,...}
-           serie.append(1  + (i//2)*2) # 1,3,5,7,..
-        else : #Indices impares (1,3,5,...)
-            serie.append(5 + (i//2)*2) #5,7,9....
+if tamaño > 0:
+    st.write(f"Ingrese {tamaño} numeros:")
+    for i in range(tamaño):
+        numero= st.number_input(f"Numero{i+1}:", key=i) #Uso de 'Key' para que cada input tenga un identidicador unico
+        st.session_state.numeros.append(numero)
 
-    return sum(serie)
+buscar = st.number_input("Ingrese un numero a buscar:", step=1.0)
 
-
-#Boton para calcular la suma
-if st.button("calcular suma"):
-    if n>0: #Validación
-       suma = calcular_suma(n)
-       st.write(f"La suma de los primeros {n} elementos de la series es : {suma}")
+if st.button("Buscar"):
+    if st.session_state.numeros:
+        #Contar cuantas veces aparece el numero buscado en el array
+        conteo= st.session_state.numeros.count(buscar)
+        st.write(f"El numero {buscar} se encontro {conteo} vez/veces en el array")
     else:
-        st.warning("Por favor, ingrese un número entero positivo")
+        st.write("No se han ingresado numeros en el array")
