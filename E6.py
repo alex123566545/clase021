@@ -14,7 +14,7 @@ puntos = st.number_input("Ingrese los puntos contaminates del automovil:", step=
 
 #Boton para añadir  los puntos contaminantes 
 
-if st.botton("Anadir Automovil"):
+if st.button("Anadir Automovil"):
     if puntos > 0: # Aseguramos que se añada solo si el punto es mayor a cero
        st.session_state.puntos_contaminantes.append(puntos)
        st.session_state(f"Número añadido:{puntos}" )
